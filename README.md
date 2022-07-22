@@ -6,6 +6,12 @@ Aula 1:
 - Instalamos e preparamos o axios;
 - Fizemos requisições GET, para listar pratos e restaurantes.
 
+Aula 2:
+
+- Instalamos e utilizamos a biblioteca MUI;
+- Implementamos a listagem de restaurantes realizando uma requisição GET;
+- Criamos a rotina de cadastro de restaurantes com o verbo HTTP POST.
+
 ![Integrando seu projeto React com APIs](thumbnail.png)
 
 # Alfood
