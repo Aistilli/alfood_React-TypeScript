@@ -2,6 +2,7 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import http from '../../../http';
+import IRestaurante from '../../../interfaces/IRestaurante';
 
 const FormularioRestaurante = () => {
   const parametros = useParams();
@@ -9,7 +10,7 @@ const FormularioRestaurante = () => {
   useEffect(() => {
     if (parametros.id) {
       http
-        .get(`restaurantes/${parametros.id}/`)
+        .get<IRestaurante>(`restaurantes/${parametros.id}/`)
         .then((resposta) => setNomeRestaurante(resposta.data.nome));
     }
   }, [parametros]);
@@ -36,9 +37,6 @@ const FormularioRestaurante = () => {
           alert('Restaurante cadastrado com sucesso');
         });
     }
-
-    console.log('Preciso enviar os dados para api');
-    console.log(nomeRestaurante);
   };
 
   return (

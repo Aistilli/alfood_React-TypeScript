@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import http from '../../../http';
 import IRestaurante from '../../../interfaces/IRestaurante';
 
@@ -18,7 +18,7 @@ const AdministracaoRestaurantes = () => {
 
   useEffect(() => {
     http
-      .get('restaurantes/')
+      .get<IRestaurante[]>('restaurantes/')
       .then((resposta) => setRestaurantes(resposta.data));
   }, []);
 
@@ -47,7 +47,9 @@ const AdministracaoRestaurantes = () => {
               <TableCell>{restaurante.nome}</TableCell>
               <TableCell>
                 [
-                <Link to={`/admin/restaurantes/${restaurante.id}`}>editar</Link>
+                <RouterLink to={`/admin/restaurantes/${restaurante.id}`}>
+                  editar
+                </RouterLink>
                 ]
               </TableCell>
               <TableCell>

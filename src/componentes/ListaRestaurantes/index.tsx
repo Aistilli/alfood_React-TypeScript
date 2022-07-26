@@ -1,3 +1,13 @@
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import axios, { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPaginacao } from '../../interfaces/IPaginacao';
@@ -83,35 +93,48 @@ const ListaRestaurantes = () => {
 
   return (
     <section className={style.ListaRestaurantes}>
-      <h1>
-        Os restaurantes mais <em>bacanas</em>!
-      </h1>
-      {/* sinta-se livre para deixar o formulário mais elegante, aplicando estilos CSS */}
-      <form onSubmit={buscar}>
-        <div>
-          <input
-            type='text'
+      <Typography sx={{ textAlign: 'center' }} component='h2' variant='h4'>
+        Os restaurantes mais{' '}
+        <strong>
+          <em>bacanas</em>!
+        </strong>
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          flexGrow: 1,
+          width: '50%',
+        }}
+      >
+        {/* sinta-se livre para deixar o formulário mais elegante, aplicando estilos CSS */}
+        <Box component='form' sx={{ width: '100%' }} onSubmit={buscar}>
+          <TextField
             value={busca}
             onChange={(evento) => setBusca(evento.target.value)}
+            id='standard-basic'
+            label='Busque o restaurante'
+            variant='standard'
+            fullWidth
+            margin='dense'
           />
-        </div>
-        <div>
-          <label htmlFor='select-ordenacao'>Ordenação</label>
-          <select
-            name='select-ordenacao'
-            id='select-ordenacao'
-            value={ordenacao}
-            onChange={(evento) => setOrdenacao(evento.target.value)}
-          >
-            <option value=''>Padrão</option>
-            <option value='id'>Por ID</option>
-            <option value='nome'>Por Nome</option>
-          </select>
-        </div>
-        <div>
-          <button type='submit'>buscar</button>
-        </div>
-      </form>
+          <FormControl margin='dense' fullWidth>
+            <InputLabel id='select-ordenacao'>Ordenação</InputLabel>
+            <Select
+              labelId='select-ordenacao'
+              value={ordenacao}
+              onChange={(evento) => setOrdenacao(evento.target.value)}
+            >
+              <MenuItem value=''>Padrão</MenuItem>
+              <MenuItem value='id'>Por ID</MenuItem>
+              <MenuItem value='nome'>Por Nome</MenuItem>
+            </Select>
+          </FormControl>
+          <Button type='submit'>buscar</Button>
+        </Box>
+      </Box>
+      {/* </form> */}
       {restaurantes?.map((item) => (
         <Restaurante restaurante={item} key={item.id} />
       ))}
@@ -119,20 +142,20 @@ const ListaRestaurantes = () => {
       {proximaPagina && <button onClick={verMais}>ver mais</button>}
        */}
       {
-        <button
+        <Button
           onClick={() => carregaDados(paginaAnterior)}
           disabled={!paginaAnterior}
         >
           Página anterior
-        </button>
+        </Button>
       }
       {
-        <button
+        <Button
           onClick={() => carregaDados(proximaPagina)}
           disabled={!proximaPagina}
         >
           Próxima página
-        </button>
+        </Button>
       }
     </section>
   );
